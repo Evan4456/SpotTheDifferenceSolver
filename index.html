@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
+    </script>
+    <script src="script.js">
+    </script>
+
+    <div id="imageDisplay">
+        <canvas id="ImgDisOne"></canvas>
+        <canvas id="ImgDisTwo"></canvas>
+        <canvas id="diffs"></canvas>
+    </div>
+
+    <div id="imageInput">
+        <label for="fImage">First Image</label>
+        <input type="file" accept="image/*" id="fImage" name="fImage" onchange="loadFirstImg()">
+        <label for="sImage">Second Image</label>
+        <input type="file" accept="image/*" id="sImage" name="sImage" onchange="loadSecondImg()">
+        <button onclick="spotTheDiff()">Spot the Difference</button>
+    </div>
+
+</body>
+</html>
