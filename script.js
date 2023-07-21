@@ -15,7 +15,6 @@ function loadSecondImg(){
     img.drawTo(canvas);
 }
 
-//should probably make these my own method later on
 function getPixel(imgData, index) {
     var i = index*4, d = imgData.data;
     return [d[i],d[i+1],d[i+2],d[i+3]] // [R,G,B,A]
@@ -58,15 +57,15 @@ function spotTheDiff(){
         if (JSON.stringify(pxOne) === JSON.stringify(pxTwo)){
 
         }else{
-            setPixel(diffsImage, i , 57, 255, 20, 150);
-            //setPixel(imageDataOne, i , 57, 255, 20, 150);
-            //setPixel(imageDataTwo, i , 57, 255, 20, 150);
+            //setPixel(diffsImage, i , 57, 255, 20, 150);
+            setPixel(imageDataOne, i , 57, 255, 20, 150);
+            setPixel(imageDataTwo, i , 57, 255, 20, 150);
             //console.log("pixel being set");
         }
     }
-    diffsContext.putImageData(diffsImage, 0, 0);
-    //contextOne.putImageData(imageDataOne, 0, 0);
-    //contextTwo.putImageData(imageDataTwo, 0, 0);
+    //diffsContext.putImageData(diffsImage, 0, 0);
+    contextOne.putImageData(imageDataOne, 0, 0);
+    contextTwo.putImageData(imageDataTwo, 0, 0);
 
     return;
 }
