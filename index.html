@@ -7,6 +7,8 @@
     </script>
     <script src="script.js">
     </script>
+    <script src="figue.js">
+    </script>
 
     <div id="imageDisplay">
         <canvas id="ImgDisOne"></canvas>
@@ -19,7 +21,8 @@
         <input type="file" accept="image/*" id="fImage" name="fImage" onchange="loadFirstImg()">
         <label for="sImage">Second Image</label>
         <input type="file" accept="image/*" id="sImage" name="sImage" onchange="loadSecondImg()">
-        <button onclick="spotTheDiff()">Spot the Difference</button>
+        <input type="number" id="numDiffs" name="numDiffs" onchange="enableButton()">
+        <button id="spotTheDiff" onclick="spotTheDiffClusters()" disabled>Spot the Difference</button>
     </div>
 
 </body>
