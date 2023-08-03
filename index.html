@@ -3,12 +3,10 @@
 
 <body>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js">
-    </script>
-    <script src="script.js">
-    </script>
-    <script src="figue.js">
-    </script>
+    <script src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+    <script src="jDBSCAN.js"></script>
+    <script src="script.js"></script>
+    <script src="figue.js"></script>
 
     <div id="imageDisplay">
         <canvas id="ImgDisOne"></canvas>
@@ -22,7 +20,7 @@
         <label for="sImage">Second Image</label>
         <input type="file" accept="image/*" id="sImage" name="sImage" onchange="loadSecondImg()">
         <input type="number" id="numDiffs" name="numDiffs" onchange="enableButton()">
-        <button id="spotTheDiff" onclick="spotTheDiffClusters()" disabled>Spot the Difference</button>
+        <button id="spotTheDiff" onclick="spotTheDiffClustersDBSCAN()" disabled>Spot the Difference</button>
     </div>
 
 </body>

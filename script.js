@@ -1,3 +1,5 @@
+//const jDBSCAN = require("./jDBSCAN");
+
 function enableButton() {
     document.getElementById("spotTheDiff").disabled = false;
 }
@@ -73,7 +75,7 @@ function spotTheDiff() {
     return;
 }
 
-function spotTheDiffClusters() {
+function spotTheDiffClustersKMeans() {
     var canvasOne = document.getElementById("ImgDisOne");
     var canvasTwo = document.getElementById("ImgDisTwo");
 
@@ -101,6 +103,8 @@ function spotTheDiffClusters() {
             }
         }
     }
+
+    console.log(vectors);
 
     var clusters = figue.kmeans(document.getElementById("numDiffs").value, vectors);
 
@@ -146,4 +150,84 @@ function spotTheDiffClusters() {
     contextTwo.putImageData(imageDataTwo, 0, 0);
 
     return;
+}
+
+function spotTheDiffClustersDBSCAN(){
+    var canvasOne = document.getElementById("ImgDisOne");
+    var canvasTwo = document.getElementById("ImgDisTwo");
+
+    var contextOne = canvasOne.getContext("2d");
+    var contextTwo = canvasTwo.getContext("2d");
+
+    if (canvasOne.width != canvasTwo.width || canvasOne.height != canvasTwo.height) {
+        alert("Images must be the same size");
+        return;
+    }
+
+    var imageDataOne = contextOne.getImageData(0, 0, canvasOne.width, canvasOne.height);
+    var imageDataTwo = contextTwo.getImageData(0, 0, canvasTwo.width, canvasTwo.height);
+    
+    let data = [];
+    var dataIndex = 0;
+
+    for (let w = 0; w < canvasOne.width; w++) {
+        for (let h = 0; h < canvasOne.height; h++) {
+            if (JSON.stringify(getPixel(imageDataOne, h * canvasOne.width + w)) === JSON.stringify(getPixel(imageDataTwo, h * canvasOne.width + w))) {
+
+            } else {
+                data[dataIndex] = 
+                    {
+                        x: w,
+                        y: h
+                    };
+                dataIndex = dataIndex + 1;
+            }
+        }
+    }
+
+
+    var dbScanner = jDBSCAN().eps(12).minPts(1).distance('EUCLIDEAN').data(data);
+
+    var point_assignment_result = dbScanner();
+
+    
+    for(var i = 0; i < point_assignment_result.length; i++){
+
+        switch (point_assignment_result[i]) {
+            case 10:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 14, 185, 12, 255); // green rgba(14, 185, 12, 1)
+                break;
+            case 1:
+                setPixel(imageDataOne,data[i].y * canvasOne.width + data[i].x, 255, 0, 0, 255); // red
+                break;
+            case 2:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 0, 255, 0, 255); //yellow
+                break;
+            case 3:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 0, 0, 255, 255); //blue
+                break;
+            case 4:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 255, 0, 205, 255); //pink
+                break;
+            case 5:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 0, 255, 255, 255); //"tuquois"
+                break;
+            case 6:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 255, 162, 0, 255); //orange
+                break;
+            case 7:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 0, 0, 0, 255); //black
+                break;
+            case 8:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 255, 255, 255, 255); //white
+                break;
+            case 9:
+                setPixel(imageDataOne, data[i].y * canvasOne.width + data[i].x, 150, 150, 150, 255); //grey
+                break;
+        }
+    }
+
+    contextOne.putImageData(imageDataOne, 0, 0);
+    contextTwo.putImageData(imageDataTwo, 0, 0);
+    
 }
