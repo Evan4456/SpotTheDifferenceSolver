@@ -33,7 +33,7 @@ function setPixel(imgData, index, r, g, b, a) {
     d[i + 3] = a;
 }
 
-function spotTheDiff() {
+/*function spotTheDiff() {
     var canvasOne = document.getElementById("ImgDisOne");
     var canvasTwo = document.getElementById("ImgDisTwo");
 
@@ -73,7 +73,7 @@ function spotTheDiff() {
     contextTwo.putImageData(imageDataTwo, 0, 0);
 
     return;
-}
+}*/
 
 function spotTheDiffClustersKMeans() {
     var canvasOne = document.getElementById("ImgDisOne");
