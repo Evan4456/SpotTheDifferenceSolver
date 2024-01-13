@@ -1,4 +1,3 @@
-//const jDBSCAN = require("./jDBSCAN");
 
 function enableButton() {
     document.getElementById("spotTheDiff").disabled = false;
@@ -70,7 +69,7 @@ function spotTheDiffClustersDBSCAN(){
 
     //run density based scan 
     var dbScanner = jDBSCAN().eps(12).minPts(1).distance('EUCLIDEAN').data(data);
-
+ 
     var point_assignment_result = dbScanner();
 
     //count the differences 
@@ -116,11 +115,13 @@ function spotTheDiffClustersDBSCAN(){
         }
 
         //use that center and radius to draw a circle
+        contextOne.lineWidth = 3;
         contextOne.beginPath();
         contextOne.arc(center_x, center_y, max_distance_from_center ,0 , 2 * 3.14159); // 10 ought to become a radius
         contextOne.strokeStyle = "blue";
         contextOne.stroke();
 
+        contextTwo.lineWidth = 3;
         contextTwo.beginPath();
         contextTwo.arc(center_x, center_y, max_distance_from_center ,0 , 2 * 3.14159); // 10 ought to become a radius
         contextTwo.strokeStyle = "blue";
